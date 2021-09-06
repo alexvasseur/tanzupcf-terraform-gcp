@@ -100,3 +100,16 @@ resource "google_compute_firewall" "dns" {
   target_tags = ["redis-enterprise-node"]
 }
 
+resource "google_compute_firewall" "redis-cli" {
+  name    = "${var.environment_name}-redis-cli"
+  network = google_compute_network.network.name
+
+  direction = "INGRESS"
+
+  allow {
+    protocol = "tcp"
+    ports    = ["8443","10000-19999"]
+  }
+
+  target_tags = ["redis-enterprise-node"]
+}
